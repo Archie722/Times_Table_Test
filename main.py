@@ -9,7 +9,8 @@
 # call open, write and close for the quiz and answer key text fields
 # use random.shuffle() to randomise the order of the questions 
 
-import random, itertools
+import random, itertools, os
+from datetime import datetime
 # List containing the common numbers
 oneTooTwelve = [1,2,3,4,5,6,7,8,9,10,11,12]
 # List containing the questions
@@ -98,8 +99,58 @@ def printQuestionSheet(question_list):
     # TODO create a new folder each time a test is done with the date as the name
     pass
 
+def makeNewFolder(testingTable):
+    name = datetime.now()
+    dt_string = name.strftime('%d_%m_%Y-%H.%M.%S')
+    os.mkdir(dt_string + ' ' + testingTable)
 
+def userChoice(choice):
+    folder_title = choice + ' times table practice'
+    if choice == '1':
+        printAnswerSheet(oneTimesQuestions)
+        makeNewFolder(folder_title)
+    if choice == '2':
+        printAnswerSheet(twoTimesQuestions)
+        makeNewFolder(folder_title)
+    if choice == '3':
+        printAnswerSheet(threeTimesQuestions)
+        makeNewFolder(folder_title)
+    if choice == '4':
+        printAnswerSheet(fourTimesQuestions)
+        makeNewFolder(folder_title)
+    if choice == '5':
+        printAnswerSheet(fiveTimesQuestions)
+        makeNewFolder(folder_title)
+    if choice == '6':
+        printAnswerSheet(sixTimesQuestions)
+        makeNewFolder(folder_title)
+    if choice == '7':
+        printAnswerSheet(sevenTimesQuestions)
+        makeNewFolder(folder_title)
+    if choice == '8':
+        printAnswerSheet(eightTimesQuestions)
+        makeNewFolder(folder_title)
+    if choice == '9':
+        printAnswerSheet(nineTimesQuestions)
+        makeNewFolder(folder_title)
+    if choice == '10':
+        printAnswerSheet(tenTimesQuestions)
+        makeNewFolder(folder_title)
+    if choice == '11':
+        printAnswerSheet(elevenTimesQuestions)
+        makeNewFolder(folder_title)
+    if choice == '12':
+        printAnswerSheet(twelveTimesQuestions)
+        makeNewFolder(folder_title)
 
-initialiseLists()
-printAnswerSheet(twoTimesQuestions)
+def userInput():
+    user_choice = (input('Please enter a number between 1 & 12 of a times table you want to practice: \n'))
+    return user_choice
 
+def main():
+    initialiseLists()
+    choice = userInput()
+    userChoice(choice)
+    
+
+main()
