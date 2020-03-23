@@ -9,8 +9,10 @@
 # call open, write and close for the quiz and answer key text fields
 # use random.shuffle() to randomise the order of the questions 
 
-import random, itertools, os
+import random, itertools, os, re
 from datetime import datetime
+from shutil import copyfile
+
 # List containing the common numbers
 oneTooTwelve = [1,2,3,4,5,6,7,8,9,10,11,12]
 # List containing the questions
@@ -39,11 +41,9 @@ class TimesTableQuestion():
             ans1 = (str(number) + ' X ' + str(self.multiplyer) + ' = ' + str(number * self.multiplyer))
             ans2 = (str(self.multiplyer) + ' X ' + str(number) + ' = ' + str(number * self.multiplyer))
             ans3 = (str(number * self.multiplyer) + ' / ' + (str(self.multiplyer) + ' = ' + (str(int((number * self.multiplyer) / self.multiplyer)))))
-            # TODO add a line to include the divide questions - answer/common_value
             self.output_list.append(ans1)
             self.output_list.append(ans2)
             self.output_list.append(ans3)
-            # TODO add the divide questions to the list
         return self.output_list
 
 def initialiseLists():
@@ -90,18 +90,32 @@ def printAnswerSheet(question_list, folder_name):
     infinate_loop = itertools.cycle(question_list) # continuously cycle the list
     question_set = itertools.islice(infinate_loop, 0, 40) # take the first 40 questions
     current_directory = os.getcwd()
-
-    answer_file = open(current_directory + '/' + folder_name + '/Answer_Sheet.txt', 'w+')
-    for question in question_set:# print the output
-        # print(question + '\n')
+    answer_file = open(current_directory + '/' + folder_name + '/Answer_Sheet.txt', 'w+')# create a new file
+    for question in question_set:# print the output to the file
         answer_file.write(question + '\n')
-    answer_file.close()
+    answer_file.close()# close the file
+    
 
-def printQuestionSheet(answer_sheet):
+def printQuestionSheet(folder_name):
     # TODO get the answer file, make a copy, remove the answers
     # TODO should have 2 seperate sheets, qustion and answer
     # TODO create a new folder each time a test is done with the date as the name
-    pass
+    current_directory = os.getcwd()
+    answer_sheet = current_directory + '/' + folder_name + '/' + 'Answer_Sheet.txt' # path of the answer sheet
+    question_sheet = current_directory + '/' + folder_name + '/' + 'Question_Sheet.txt' # path of the question sheet to be made
+    copyfile(answer_sheet, question_sheet) # create a copy of the answer sheet and call it Question_Sheet
+    qSheet = open(current_directory + '/' + folder_name + '/' + 'Question_Sheet.txt') # Open the question sheet
+    read_obj = qSheet.read()
+    qestRegex = re.compile(r'=...')
+    qestRegex2 = re.compile(r'=..')
+    twoFigAnswers = qestRegex.findall(read_obj)
+    oneFigAnswers = qestRegex2.findall(read_obj)
+    qSheet.close()
+    answer_list = twoFigAnswers + oneFigAnswers
+    print(answer_list)
+    print(len(answer_list))
+    for answer in answer_list:
+        print(answer)
 
 def makeNewFolder(testingTable):
     name = datetime.now()
@@ -114,40 +128,52 @@ def userChoice(choice):
     folder_title = choice + ' times table practice'
     if choice == '1':
         folder_name_one = makeNewFolder(folder_title)
-        printAnswerSheet(oneTimesQuestions, folder_name_one)   
+        printAnswerSheet(oneTimesQuestions, folder_name_one) 
+        printQuestionSheet(folder_name_one)
     if choice == '2':
         folder_name_two = makeNewFolder(folder_title)
         printAnswerSheet(twoTimesQuestions, folder_name_two) 
+        printQuestionSheet(folder_name_two)
     if choice == '3':
         folder_name_three = makeNewFolder(folder_title)
         printAnswerSheet(threeTimesQuestions, folder_name_three)
+        printQuestionSheet(folder_name_three)
     if choice == '4':
         folder_name_four = makeNewFolder(folder_title)
         printAnswerSheet(fourTimesQuestions, folder_name_four)
+        printQuestionSheet(folder_name_four)
     if choice == '5':
         folder_name_five = makeNewFolder(folder_title)
         printAnswerSheet(fiveTimesQuestions, folder_name_five)
+        printQuestionSheet(folder_name_five)
     if choice == '6':
         folder_name_six = makeNewFolder(folder_title)
         printAnswerSheet(sixTimesQuestions, folder_name_six)
+        printQuestionSheet(folder_name_six)
     if choice == '7':
         folder_name_seven = makeNewFolder(folder_title)
         printAnswerSheet(sevenTimesQuestions, folder_name_seven)
+        printQuestionSheet(folder_name_seven)
     if choice == '8':
         folder_name_eight = makeNewFolder(folder_title)
         printAnswerSheet(eightTimesQuestions, folder_name_eight)
+        printQuestionSheet(folder_name_eight)
     if choice == '9':
         folder_name_nine = makeNewFolder(folder_title)
         printAnswerSheet(nineTimesQuestions, folder_name_nine)
+        printQuestionSheet(folder_name_nine)
     if choice == '10':
         folder_name_ten = makeNewFolder(folder_title)
         printAnswerSheet(tenTimesQuestions, folder_name_ten)
+        printQuestionSheet(folder_name_ten)
     if choice == '11':
         folder_name_eleven = makeNewFolder(folder_title)
         printAnswerSheet(elevenTimesQuestions, folder_name_eleven)
+        printQuestionSheet(folder_name_eleven)
     if choice == '12':
         folder_name_twelve = makeNewFolder(folder_title)
         printAnswerSheet(twelveTimesQuestions, folder_name_twelve)
+        printQuestionSheet(folder_name_twelve)
         
 def userInput():
     user_choice = (input('Please enter a number between 1 & 12 of a times table you want to practice: \n'))
