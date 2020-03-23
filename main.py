@@ -85,15 +85,19 @@ def initialiseLists():
     twelveTimesTable = TimesTableQuestion(oneTooTwelve,12,twelveTimesQuestions)
     twelveTimesTable.generateQuestion()
 
-def printAnswerSheet(question_list):
+def printAnswerSheet(question_list, folder_name):
     random.shuffle(question_list) # shuffle the question list
     infinate_loop = itertools.cycle(question_list) # continuously cycle the list
     question_set = itertools.islice(infinate_loop, 0, 40) # take the first 40 questions
-    for question in question_set:# print the output
-        print(question + '\n')
-        # TODO write the output to a text file
+    current_directory = os.getcwd()
 
-def printQuestionSheet(question_list):
+    answer_file = open(current_directory + '/' + folder_name + '/Answer_Sheet.txt', 'w+')
+    for question in question_set:# print the output
+        # print(question + '\n')
+        answer_file.write(question + '\n')
+    answer_file.close()
+
+def printQuestionSheet(answer_sheet):
     # TODO get the answer file, make a copy, remove the answers
     # TODO should have 2 seperate sheets, qustion and answer
     # TODO create a new folder each time a test is done with the date as the name
@@ -102,47 +106,49 @@ def printQuestionSheet(question_list):
 def makeNewFolder(testingTable):
     name = datetime.now()
     dt_string = name.strftime('%d_%m_%Y-%H.%M.%S')
-    os.mkdir(dt_string + ' ' + testingTable)
+    complete_string = dt_string + ' ' + testingTable
+    os.mkdir(complete_string)
+    return complete_string
 
 def userChoice(choice):
     folder_title = choice + ' times table practice'
     if choice == '1':
-        printAnswerSheet(oneTimesQuestions)
-        makeNewFolder(folder_title)
+        folder_name_one = makeNewFolder(folder_title)
+        printAnswerSheet(oneTimesQuestions, folder_name_one)   
     if choice == '2':
-        printAnswerSheet(twoTimesQuestions)
-        makeNewFolder(folder_title)
+        folder_name_two = makeNewFolder(folder_title)
+        printAnswerSheet(twoTimesQuestions, folder_name_two) 
     if choice == '3':
-        printAnswerSheet(threeTimesQuestions)
-        makeNewFolder(folder_title)
+        folder_name_three = makeNewFolder(folder_title)
+        printAnswerSheet(threeTimesQuestions, folder_name_three)
     if choice == '4':
-        printAnswerSheet(fourTimesQuestions)
-        makeNewFolder(folder_title)
+        folder_name_four = makeNewFolder(folder_title)
+        printAnswerSheet(fourTimesQuestions, folder_name_four)
     if choice == '5':
-        printAnswerSheet(fiveTimesQuestions)
-        makeNewFolder(folder_title)
+        folder_name_five = makeNewFolder(folder_title)
+        printAnswerSheet(fiveTimesQuestions, folder_name_five)
     if choice == '6':
-        printAnswerSheet(sixTimesQuestions)
-        makeNewFolder(folder_title)
+        folder_name_six = makeNewFolder(folder_title)
+        printAnswerSheet(sixTimesQuestions, folder_name_six)
     if choice == '7':
-        printAnswerSheet(sevenTimesQuestions)
-        makeNewFolder(folder_title)
+        folder_name_seven = makeNewFolder(folder_title)
+        printAnswerSheet(sevenTimesQuestions, folder_name_seven)
     if choice == '8':
-        printAnswerSheet(eightTimesQuestions)
-        makeNewFolder(folder_title)
+        folder_name_eight = makeNewFolder(folder_title)
+        printAnswerSheet(eightTimesQuestions, folder_name_eight)
     if choice == '9':
-        printAnswerSheet(nineTimesQuestions)
-        makeNewFolder(folder_title)
+        folder_name_nine = makeNewFolder(folder_title)
+        printAnswerSheet(nineTimesQuestions, folder_name_nine)
     if choice == '10':
-        printAnswerSheet(tenTimesQuestions)
-        makeNewFolder(folder_title)
+        folder_name_ten = makeNewFolder(folder_title)
+        printAnswerSheet(tenTimesQuestions, folder_name_ten)
     if choice == '11':
-        printAnswerSheet(elevenTimesQuestions)
-        makeNewFolder(folder_title)
+        folder_name_eleven = makeNewFolder(folder_title)
+        printAnswerSheet(elevenTimesQuestions, folder_name_eleven)
     if choice == '12':
-        printAnswerSheet(twelveTimesQuestions)
-        makeNewFolder(folder_title)
-
+        folder_name_twelve = makeNewFolder(folder_title)
+        printAnswerSheet(twelveTimesQuestions, folder_name_twelve)
+        
 def userInput():
     user_choice = (input('Please enter a number between 1 & 12 of a times table you want to practice: \n'))
     return user_choice
