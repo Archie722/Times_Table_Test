@@ -8,6 +8,10 @@
 # TODO Fix the issue where the answer has three decimals eg: 11 X 10 = 110
 # TODO Add diferent levels of test to mix different times tables, eg Bronze, Silver, Gold
 # TODO Add spaces between the lines in the output
+# TODO Add some error states, example user enters number outside 1-12
+# TODO Add a user option to reapeat again
+# TODO Create windows version
+# TODO Create an .exe file
 
 
 import random, itertools, os, re
@@ -177,6 +181,5 @@ def main():
     initialiseLists() # fill all the empty lists with variations of a times table and divide
     choice = userInput()
     userChoice(choice)
-    
 
 main()
