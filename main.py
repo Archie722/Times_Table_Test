@@ -1,5 +1,5 @@
-
 # TODO add a countdown timer for 4 min - press enter to start
+# TODO Fix the issue where the answer has three decimals eg: 11 X 10 = 110
 
 import random, itertools, os, re
 from datetime import datetime
@@ -101,7 +101,7 @@ def printQuestionSheet(folder_name):
     qSheet.close()
     revisedQsheet = open(current_directory + '/' + folder_name + '/' + 'Question_Sheet.txt', 'w')
     revisedQsheet.write(subbed_answer)
-
+# Creates a new flolder and returns the folder name for later use in the path
 def makeNewFolder(testingTable):
     name = datetime.now()
     dt_string = name.strftime('%d_%m_%Y-%H.%M.%S')
@@ -165,7 +165,7 @@ def userInput():
     return user_choice
 
 def main():
-    initialiseLists()
+    initialiseLists() # fill all the empty lists with variations of a times table and divide
     choice = userInput()
     userChoice(choice)
     
