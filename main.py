@@ -1,13 +1,5 @@
-# TODO create a random quize for a times table/divide
-# TODO create 40 qustions as a mixture of combination
-# TODO write the quiz to a text file - named the quiz and the date
-# TODO write an answersheet to another file to compare answers
-# TODO add a countdown timer for 4 min - press enter to start
 
-# example question 5 X 5 = 
-# store the questions and answers in a dict
-# call open, write and close for the quiz and answer key text fields
-# use random.shuffle() to randomise the order of the questions 
+# TODO add a countdown timer for 4 min - press enter to start
 
 import random, itertools, os, re
 from datetime import datetime
@@ -97,25 +89,18 @@ def printAnswerSheet(question_list, folder_name):
     
 
 def printQuestionSheet(folder_name):
-    # TODO get the answer file, make a copy, remove the answers
-    # TODO should have 2 seperate sheets, qustion and answer
-    # TODO create a new folder each time a test is done with the date as the name
     current_directory = os.getcwd()
     answer_sheet = current_directory + '/' + folder_name + '/' + 'Answer_Sheet.txt' # path of the answer sheet
     question_sheet = current_directory + '/' + folder_name + '/' + 'Question_Sheet.txt' # path of the question sheet to be made
     copyfile(answer_sheet, question_sheet) # create a copy of the answer sheet and call it Question_Sheet
     qSheet = open(current_directory + '/' + folder_name + '/' + 'Question_Sheet.txt') # Open the question sheet
-    read_obj = qSheet.read()
-    qestRegex = re.compile(r'=...')
-    qestRegex2 = re.compile(r'=..')
-    twoFigAnswers = qestRegex.findall(read_obj)
-    oneFigAnswers = qestRegex2.findall(read_obj)
+    questions = qSheet.read()
+    pattern = re.compile(r'\= \d\d?')
+    # TODO fix the issue where the answer has 3 numbers eg 10 X 10 = 100
+    subbed_answer = pattern.sub(r'=', questions)
     qSheet.close()
-    answer_list = twoFigAnswers + oneFigAnswers
-    print(answer_list)
-    print(len(answer_list))
-    for answer in answer_list:
-        print(answer)
+    revisedQsheet = open(current_directory + '/' + folder_name + '/' + 'Question_Sheet.txt', 'w')
+    revisedQsheet.write(subbed_answer)
 
 def makeNewFolder(testingTable):
     name = datetime.now()
