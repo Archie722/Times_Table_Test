@@ -1,5 +1,14 @@
-# TODO add a countdown timer for 4 min - press enter to start
+
+# TODO test
+# ! alert
+# * important - highlighted
+# ? Question
+
+# TODO Add a countdown timer for 4 min - press enter to start
 # TODO Fix the issue where the answer has three decimals eg: 11 X 10 = 110
+# TODO Add diferent levels of test to mix different times tables, eg Bronze, Silver, Gold
+# TODO Add spaces between the lines in the output
+
 
 import random, itertools, os, re
 from datetime import datetime
@@ -96,7 +105,7 @@ def printQuestionSheet(folder_name):
     qSheet = open(current_directory + '/' + folder_name + '/' + 'Question_Sheet.txt') # Open the question sheet
     questions = qSheet.read()
     pattern = re.compile(r'\= \d\d?')
-    # TODO fix the issue where the answer has 3 numbers eg 10 X 10 = 100
+    # FIXME: fix the issue where the answer has 3 numbers eg 10 X 10 = 100
     subbed_answer = pattern.sub(r'=', questions)
     qSheet.close()
     revisedQsheet = open(current_directory + '/' + folder_name + '/' + 'Question_Sheet.txt', 'w')
