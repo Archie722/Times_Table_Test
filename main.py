@@ -66,7 +66,7 @@ def initialiseLists():
     eightTimesTable.generateQuestion()
 
     nineTimesTable = TimesTableQuestion(oneTooTwelve,9,nineTimesQuestions)
-    fiveTimesTable.generateQuestion()
+    nineTimesTable.generateQuestion()
 
     tenTimesTable = TimesTableQuestion(oneTooTwelve,10,tenTimesQuestions)
     tenTimesTable.generateQuestion()
