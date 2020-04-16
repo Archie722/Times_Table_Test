@@ -12,7 +12,7 @@ It will crete a new folder at teh relative path, named the date, time and times 
 
 Inside the folder will be a question sheet and an answer sheet.
 
-There are 40 frandom questions, different each time that include divide's.
+There are 40 random questions, different each time that include divide's.
 
 Eg:
 
